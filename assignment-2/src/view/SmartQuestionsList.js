@@ -13,6 +13,7 @@ export default class SmartQuestionsList extends Component {
         this.state = mapModelStateToComponentState(model.state);
         this.listener = modelState => this.setState(mapModelStateToComponentState(modelState));
         model.addListener("change", this.listener);
+        questionsListPresenter.onInit();
     }
 
     componentWillUnmount() {

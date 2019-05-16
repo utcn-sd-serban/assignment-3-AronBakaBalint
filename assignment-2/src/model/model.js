@@ -1,4 +1,7 @@
 import { EventEmitter } from "events";
+import RestClient from "../rest/RestClient";
+
+const client = new RestClient("John", "1234");
 
 class Model extends EventEmitter {
 
@@ -11,21 +14,8 @@ class Model extends EventEmitter {
             searchWord: "",
             editedAnswerId: -1,
             newAnswerText: "",
-            questions: [{
-                id: 1,
-                title: "Java 8",
-                body: "What are the new features in Java8?",
-                tags: "java,programming",
-                author: "John",
-                postDate: "4/13/2019 3:26 PM"
-            }, {
-                id: 2,
-                title: "Static",
-                body: "Difference between static in Java and C++?",
-                tags: "java,C++",
-                author: "Kate",
-                postDate: "4/13/2019 3:48 PM"
-            }],
+            filterResult: [],
+            questions: [],
             answers: [{
                 answerid: 1,
                 questionid: 1,
@@ -55,6 +45,36 @@ class Model extends EventEmitter {
                 tags:""
             }
         };
+    }
+
+    loadQuestions(){
+        return client.loadAllQuestions().then(questions => {
+            this.state = {
+                ...this.state,
+                questions: questions
+            };
+            this.emit("change", this.state);
+        })
+    }
+
+    filterByTitle(){
+        return client.filterByTitle(this.state.searchWord).then(filterRes => {
+            this.state = {
+                ...this.state,
+                filterResult: filterRes
+            };
+            this.emit("change", this.state);
+        })
+    }
+
+    filterByTag(){
+        return client.filterByTag(this.state.searchWord).then(filterRes => {
+            this.state = {
+                ...this.state,
+                filterResult: filterRes
+            };
+            this.emit("change", this.state);
+        })
     }
 
     getCurrentDate(){
@@ -87,19 +107,16 @@ class Model extends EventEmitter {
     }
 
     addQuestion(title, body, tags) {
-        this.state = {
-            ...this.state,
-            questionid: this.state.questionid + 1,
-            questions: this.state.questions.concat([{
-                id: this.state.questionid+1,
-                title: title,
-                body: body,
-                tags: tags,
-                author: this.state.user,
-                postDate: this.getCurrentDate()
-            }])
-        };
-        this.emit("change", this.state);
+        return client.createQuestion(title, body, tags)
+        .then( question => {
+                this.state = {
+                    ...this.state,
+                    questionid: this.state.questionid + 1,
+                    questions: this.state.questions.concat([question])
+                };
+                this.emit("change", this.state);
+            }
+        );
     }
 
     addAnswer(questionid, text){

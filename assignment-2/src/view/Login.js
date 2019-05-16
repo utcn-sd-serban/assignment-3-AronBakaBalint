@@ -5,7 +5,6 @@ import model from "../model/model";
     <div className="container">
         <h2>Welcome to Stack Overflow</h2>
         <br/>
-        <form>
             <div className="form-group" onChange={ e => model.setUser(e.target.value)}>
                 <label>Username: </label>
                 <input/>
@@ -15,7 +14,6 @@ import model from "../model/model";
                 <input/>
             </div>
             <button className="btn btn-primary" onClick={onLogin}>Login</button>
-        </form>
     </div>
 );
 

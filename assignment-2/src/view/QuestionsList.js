@@ -7,7 +7,7 @@ const QuestionsList = ({ questions, onCreateQuestion, onViewDetails, onFilterByT
         <br/>
         <div className="col-md-12">
         <table className="table" border="1">
-            <thead class="thead-dark">
+            <thead className="thead-dark">
                 <tr>
                     <th>{}</th>
                     <th>Title</th>
@@ -29,11 +29,11 @@ const QuestionsList = ({ questions, onCreateQuestion, onViewDetails, onFilterByT
             </tbody>
         </table>
         </div>
-        <button class="btn btn-primary"  onClick={onCreateQuestion}>Add new Question</button>
+        <button className="btn btn-primary"  onClick={onCreateQuestion}>Add new Question</button>
         <br/>
         <hr></hr>
         <input onChange={ e => model.setSearchWord(e.target.value) }/>
-        <button onClick={onFilterByTitle}>Filter By Title</button>
+        <button onClick={onFilterByTitle} type="button">Filter By Title</button>
         <button onClick={onFilterByTag}>Filter By Tag</button>
     </div>
 );

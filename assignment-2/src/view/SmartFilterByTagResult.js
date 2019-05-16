@@ -3,8 +3,10 @@ import model from "../model/model";
 import FilterResult from "./FilterResult";
 import questionsListPresenter from "../presenter/questionsListPresenter";
 
+
 const mapModelStateToComponentState = modelState => ({
-    questions: modelState.questions
+    questions: modelState.questions,
+    filterResult: modelState.filterResult
 });
 
 export default class SmartFilterByTagResult extends Component {
@@ -19,17 +21,6 @@ export default class SmartFilterByTagResult extends Component {
         model.removeListener("change", this.listener);
     }
 
-    filterByTag(questions, text){
-        var filterResult = new Array(0);
-        var k=0;
-        for(var i=0;i < questions.length;i++){
-            if(questions[i].tags.includes(text)){
-                filterResult[k++]=(questions[i]);
-            }
-        }
-
-        return filterResult;
-    }
 
     render() {
         
@@ -37,7 +28,7 @@ export default class SmartFilterByTagResult extends Component {
             
             <FilterResult 
                 onViewDetails={questionsListPresenter.onViewDetails}
-                questions={this.filterByTag(this.state.questions, model.getSearchWord())} />
+                questions={this.state.filterResult} />
         );
     }
 

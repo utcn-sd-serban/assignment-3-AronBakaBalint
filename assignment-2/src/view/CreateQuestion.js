@@ -3,7 +3,6 @@ import React from "react";
 const CreateQuestion = ({ title, body, tags, onCreate, onChange }) => (
     <div className="container">
         <h2>Add Question</h2>
-        <form>
             <div className="form-group">
                 <label>Title: </label>
                 <input value={title} 
@@ -20,7 +19,6 @@ const CreateQuestion = ({ title, body, tags, onCreate, onChange }) => (
                     onChange={ e => onChange("tags", e.target.value) } />    
             </div>
             <button className="btn btn-secondary" onClick={onCreate}>Add</button>
-        </form>
     </div>
 );
 
