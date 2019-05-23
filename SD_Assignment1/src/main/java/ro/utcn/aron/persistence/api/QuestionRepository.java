@@ -3,6 +3,7 @@ package ro.utcn.aron.persistence.api;
 import java.util.List;
 import java.util.Optional;
 
+import ro.utcn.aron.model.Answer;
 import ro.utcn.aron.model.Question;
 
 public interface QuestionRepository {
@@ -26,6 +27,8 @@ public interface QuestionRepository {
 	List<Question> filterByTitle(String title);
 	
 	List<Question> filterByTag(String tag);
+	
+	List<Answer> getAnswerByQuestionID(int id);
 	
 	void upVoteAnswer(String username, int answerid);
 	

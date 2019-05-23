@@ -2,10 +2,10 @@ import model from "../model/model";
 
 class CreateAnswerPresenter {
 
-    onCreateAnswer() {
-        model.addAnswer(model.state.newAnswer.answerid, model.state.newAnswer.text);
-        model.changeNewQuestionProperty("title", "");
-        model.changeNewQuestionProperty("body", "");
+    onCreateAnswer(questionid) {
+        model.addAnswer(questionid, model.state.newAnswer.text);
+        model.changeNewAnswerProperty("answerid", "");
+        model.changeNewAnswerProperty("text", "");
     }
 
     onAnswerEditFinished(){

@@ -12,6 +12,7 @@ import ro.utcn.aron.command.Command;
 import ro.utcn.aron.command.QuestionAdder;
 import ro.utcn.aron.command.TagFilter;
 import ro.utcn.aron.command.TitleFilter;
+import ro.utcn.aron.dto.AnswerDTO;
 import ro.utcn.aron.dto.QuestionDTO;
 import ro.utcn.aron.service.QuestionManagementService;
 
@@ -49,4 +50,5 @@ public class QuestionController {
 		command = new QuestionAdder(questionManagementService, dto);
 		return (QuestionDTO)command.execute();
 	}
+
 }

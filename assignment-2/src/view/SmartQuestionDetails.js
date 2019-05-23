@@ -36,7 +36,7 @@ export default class SmartQuestionDetails extends Component {
                 tags={this.state.tags}
                 author={this.state.author}
                 postDate={this.state.postDate}
-                answers={model.getAnswersByQuestionId(this.state.id)}
+                answers={model.state.answers}
                 onCreateAnswer={createAnswerPresenter.onCreateAnswer}
                 onAnswerChange={createAnswerPresenter.onAnswerChange}
                 onEditAnswer={questionsListPresenter.onEditAnswer}

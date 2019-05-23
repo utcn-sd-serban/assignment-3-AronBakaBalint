@@ -10,19 +10,19 @@ const QuestionDetails = ({ id, title, body, tags, author, postDate, answers, onC
         <br />
         <span><font size="3" color="blue">{ author }</font></span>
         <br />
-        <span class="badge badge-secondary">{ postDate }</span>
+        <span className="badge badge-secondary">{ postDate }</span>
         <br />
         <br/>
-        <span class="badge badge-secondary"><font size="2">{ tags }</font></span>
+        <span className="badge badge-secondary"><font size="2">{ tags }</font></span>
         <br />
         <br/>
         <input onChange={ e => {onAnswerChange("text", e.target.value); onAnswerChange("answerid",id)}} id="inputField"></input>
-        <button onClick={() => {onCreateAnswer(); document.getElementById('inputField').value = ''}}>Answer</button>
+        <button onClick={() => {onCreateAnswer(id); document.getElementById('inputField').value = ''}}>Answer</button>
         <br/>
         <br/>
         <div className="col-md-12">
         <table className="table" border="1">
-            <thead class="thead-dark">
+            <thead className="thead-dark">
                 <tr>
                     <th>Text</th>
                     <th>Author</th>
@@ -34,12 +34,12 @@ const QuestionDetails = ({ id, title, body, tags, author, postDate, answers, onC
             <tbody>
                 {
                     answers.map((answer, index) => (
-                        <tr key={index}>
+                        <tr key={index} data-cy="answer">
                             <td>{answer.text}</td>
                             <td>{answer.author}</td>
-                            <td>{answer.postDate}</td>
-                            <td><button className="btn btn-secondary" onClick={() => {onEditAnswer(); model.setEditedAnswerId(answer.answerid)}}>Edit</button></td>
-                            <td><button className="btn btn-secondary" onClick={() => model.deleteAnswer(answer.answerid)}>Delete</button></td>
+                            <td>{answer.creationDate}</td>
+                            <td><button className="btn btn-secondary" onClick={() => {onEditAnswer(); model.setEditedAnswerId(answer.id)}}>Edit</button></td>
+                            <td><button className="btn btn-secondary" onClick={() => model.deleteAnswer(id, answer.id)}>Delete</button></td>
                         </tr>
                     ))
                 }

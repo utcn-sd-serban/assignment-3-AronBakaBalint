@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import ro.utcn.aron.dto.AnswerDTO;
 import ro.utcn.aron.dto.QuestionDTO;
 import ro.utcn.aron.model.Question;
 import ro.utcn.aron.persistence.api.QuestionRepository;
@@ -24,6 +25,12 @@ public class QuestionManagementService {
 	@Transactional
 	public List<QuestionDTO> listQuestions() {
 		return questionRepositoryFactory.createQuestionRepository().findAll().stream().map(QuestionDTO::ofEntity)
+				.collect(Collectors.toList());
+	}
+	
+	@Transactional
+	public List<AnswerDTO> listAnswerByID(int id) {
+		return questionRepositoryFactory.createQuestionRepository().getAnswerByQuestionID(id).stream().map(AnswerDTO::ofEntity)
 				.collect(Collectors.toList());
 	}
 

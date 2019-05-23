@@ -426,4 +426,10 @@ public class JdbcQuestionRepository implements QuestionRepository {
 		return !result.isEmpty();
 	}
 
+	@Override
+	public List<Answer> getAnswerByQuestionID(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

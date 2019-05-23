@@ -18,23 +18,23 @@ const QuestionsList = ({ questions, onCreateQuestion, onViewDetails, onFilterByT
             <tbody>
                 {
                     questions.map((question, index) => (
-                        <tr key={index}>
+                        <tr key={index} data-cy="question">
                             <td>{question.id}</td>
                             <td>{question.title}</td>
                             <td>{question.body}</td>
-                            <td><button className="btn btn-secondary" onClick={() => onViewDetails(index)} >View Details</button></td>
+                            <td><button className="btn btn-secondary" onClick={() => onViewDetails(index)} data-cy={index} >View Details</button></td>
                         </tr>
                     ))
                 }
             </tbody>
         </table>
         </div>
-        <button className="btn btn-primary"  onClick={onCreateQuestion}>Add new Question</button>
+        <button className="btn btn-primary" data-cy="add" onClick={onCreateQuestion}>Add new Question</button>
         <br/>
         <hr></hr>
-        <input onChange={ e => model.setSearchWord(e.target.value) }/>
+        <input onChange={ e => model.setSearchWord(e.target.value) } data-cy="filterin"/>
         <button onClick={onFilterByTitle} type="button">Filter By Title</button>
-        <button onClick={onFilterByTag}>Filter By Tag</button>
+        <button onClick={onFilterByTag} data-cy="tagfilter">Filter By Tag</button>
     </div>
 );
 

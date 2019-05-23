@@ -1,6 +1,7 @@
 import model from "../model/model";
 
 class QuestionsListPresenter {
+
     onInit(){
         model.loadQuestions();
     }
@@ -24,6 +25,7 @@ class QuestionsListPresenter {
     }
 
     onViewDetails(index) {
+        model.getAnswersByQuestionId(index);
         window.location.assign("#/question-details/" + index);
     }
 }

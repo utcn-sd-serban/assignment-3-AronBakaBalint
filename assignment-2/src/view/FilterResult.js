@@ -17,7 +17,7 @@ const FilterResult = ({ questions, onViewDetails }) => (
             <tbody>
                 {
                     questions.map((question, index) => (
-                        <tr key={index}>
+                        <tr key={index} data-cy="filterRes">
                             <td>{question.id}</td>
                             <td>{question.title}</td>
                             <td>{question.body}</td>

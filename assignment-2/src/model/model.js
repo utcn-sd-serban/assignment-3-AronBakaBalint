@@ -16,25 +16,7 @@ class Model extends EventEmitter {
             newAnswerText: "",
             filterResult: [],
             questions: [],
-            answers: [{
-                answerid: 1,
-                questionid: 1,
-                text: "I don't know",
-                author: "Caitlin",
-                postDate: "5/1/2019 10:37 AM"
-            },{
-                answerid: 2,
-                questionid: 1,
-                text: "Probably I can help you",
-                author: "James",
-                postDate: "5/1/2019 11:05 AM"
-            },{
-                answerid: 3,
-                questionid: 1,
-                text: "Ask somebody else",
-                author: "Tina",
-                postDate: "5/1/2019 11:05 AM"
-            }],
+            answers: [],
             newAnswer: {
                 anwserid: "",
                 text: ""
@@ -52,6 +34,17 @@ class Model extends EventEmitter {
             this.state = {
                 ...this.state,
                 questions: questions
+            };
+            this.emit("change", this.state);
+        })
+    }
+
+    getAnswersByQuestionId(id)
+    {
+        return client.getAnswerByQuestionId(id).then(answers => {
+            this.state = {
+                ...this.state,
+                answers: answers
             };
             this.emit("change", this.state);
         })
@@ -94,20 +87,10 @@ class Model extends EventEmitter {
         return today;
     }
 
-    getAnswersByQuestionId(questionId){
-        var result = new Array(0);
-        var k=0;
-        for(var i=0;i < this.state.answers.length;i++){
-            if(this.state.answers[i].questionid === questionId){
-                result[k++]=(this.state.answers[i]);
-            }
-        }
-
-        return result;
-    }
+    
 
     addQuestion(title, body, tags) {
-        return client.createQuestion(title, body, tags)
+        return client.createQuestion(title, body, tags, this.state.user)
         .then( question => {
                 this.state = {
                     ...this.state,
@@ -120,17 +103,27 @@ class Model extends EventEmitter {
     }
 
     addAnswer(questionid, text){
-        this.state = {
-            ...this.state,
-            answerid: this.state.answerid+1,
-            answers: this.state.answers.concat([{
-                questionid: questionid,
-                text: text,
-                author: this.state.user,
-                postDate: this.getCurrentDate()
-            }])
-        };
-        this.emit("change", this.state);
+        return client.addAnswer(questionid, text, this.state.user)
+        .then( answers => {
+                this.state = {
+                    ...this.state,
+                    answers: answers
+                };
+                this.emit("change", this.state);
+            }
+        );
+    }
+
+    deleteAnswer(questionid, answerid){
+        return client.deleteAnswer(questionid, answerid, this.state.user)
+        .then( answers => {
+                this.state = {
+                    ...this.state,
+                    answers: answers
+                };
+                this.emit("change", this.state);
+            }
+        );
     }
 
     //splice did not work for me so I wrote my own delete function
@@ -146,34 +139,24 @@ class Model extends EventEmitter {
         return resultElements;
     }
 
-    editAnswerText(answerList, answerid, newText){
-        var editedList = new Array(0);
-        var k=0;
-        for(var i=0;i < answerList.length; i++){
-            editedList[k] = answerList[i];
-            if(editedList[k].answerid === answerid && editedList[k].author === this.state.user){
-                editedList[k].text = newText;
+    getQuestionIdByAnswerId(answerid){
+        for(var i=0;i<this.state.answers.length; i++){
+            if(this.state.answers[i].id === answerid){
+                return this.state.answers[i].questionID;
             }
-            k++;
         }
-
-        return editedList;
     }
 
     editAnswer(){
-        this.state = {
-            ...this.state,
-            answers: this.editAnswerText(this.state.answers, model.state.editedAnswerId, model.state.newAnswerText)
-        }
-        this.emit("change", this.state);
-    }
-
-    deleteAnswer(id){
-        this.state = {
-            ...this.state,
-            answers: this.deleteById(this.state.answers, id)
-        }
-        this.emit("change", this.state);
+        return client.editAnswer(this.getQuestionIdByAnswerId(this.getEditedAnswerId()), this.getEditedAnswerId(), this.state.user, this.state.newAnswerText)
+        .then( answers => {
+                this.state = {
+                    ...this.state,
+                    answers: answers
+                };
+                this.emit("change", this.state);
+            }
+        );
     }
 
     changeNewAnswerProperty(property, value) {

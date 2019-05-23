@@ -70,6 +70,7 @@ public class InMemoryQuestionRepository implements QuestionRepository {
 	@Override
 	public void answerQuestion(int questionid, String user, String answerText) {
 		Answer answer = new Answer(answerText, user, new Date().toString());
+		answer.setQuestionID(questionid);
 		currentAnswerId.getAndIncrement();
 		answer.setId(currentAnswerId.intValue());
 		data.get(questionid).addAnswer(answer);	
@@ -124,6 +125,11 @@ public class InMemoryQuestionRepository implements QuestionRepository {
 	public void downVoteQuestion(String username, int answerid) {
 		data.get(answerid).downVote(username);
 		
+	}
+
+	@Override
+	public List<Answer> getAnswerByQuestionID(int id) {
+		return data.get(id).getAnswers();
 	}
 		
 

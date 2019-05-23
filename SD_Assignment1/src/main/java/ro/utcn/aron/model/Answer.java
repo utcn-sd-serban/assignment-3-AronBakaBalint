@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Answer implements Comparable {
 
 	private int id;
+	private int questionID;
 	private int score = 0;
 	private String text;
 	private String author;
@@ -65,6 +66,22 @@ public class Answer implements Comparable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getQuestionID() {
+		return questionID;
+	}
+
+	public void setQuestionID(int questionID) {
+		this.questionID = questionID;
+	}
+
+	public Map<String, Integer> getVotes() {
+		return votes;
+	}
+
+	public void setVotes(Map<String, Integer> votes) {
+		this.votes = votes;
 	}
 
 	@Override

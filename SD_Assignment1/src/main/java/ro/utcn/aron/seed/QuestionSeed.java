@@ -36,6 +36,8 @@ public class QuestionSeed implements CommandLineRunner {
 		if (questionRepository.findAll().isEmpty()) {
 			questionRepository.save(new Question(0, "What is new in Java 8?", "Can anyone list some features?", "java,programming", "John", new Date().toString()));
 			questionRepository.save(new Question(0, "Static fields", "Difference between statitic in java and c++?", "c++,static", "Kate", new Date().toString()));
+			questionRepository.answerQuestion(1, "Daniel", "I will tell you later");
+			questionRepository.answerQuestion(1, "Rose", "Sorry, I don't know");
 		}
 		
 		UserRepository userRepository = repositoryFactory.createUserRepository();
