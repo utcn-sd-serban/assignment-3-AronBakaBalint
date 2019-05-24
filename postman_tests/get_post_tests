@@ -1,0 +1,687 @@
+{
+	"info": {
+		"_postman_id": "cd0c8730-e66d-4fda-a64d-d4f43c146b0a",
+		"name": "SD_tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							"pm.test(\"Response status is OK\", function(){",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"})",
+							"",
+							"pm.test(\"Question was added successfully\", function(){",
+							"    var questions = pm.response.json();",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(questions.length).to.be.equal(6);",
+							"});",
+							"",
+							"pm.test(\"Get last question\", function(){",
+							"    var questions = pm.response.json();",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(questions.length).to.be.equal(6);",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"title\", jsonData[5].title);",
+							"    pm.environment.set(\"body\", jsonData[5].body);",
+							"    pm.expect(pm.environment.get(\"title\")).to.be.equal(\"Postman test\");",
+							"    pm.expect(pm.environment.get(\"body\")).to.be.equal(\"Testing with postman\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Postman test\",\n\t\"body\": \"Testing with postman\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							"pm.test(\"Response status is OK\", function(){",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"})",
+							"",
+							"pm.test(\"Question was added successfully\", function(){",
+							"    var questions = pm.response.json();",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(questions.length).to.be.equal(6);",
+							"});",
+							"",
+							"pm.test(\"Get last question\", function(){",
+							"    var questions = pm.response.json();",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(questions.length).to.be.equal(6);",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"title\", jsonData[5].title);",
+							"    pm.environment.set(\"body\", jsonData[5].body);",
+							"    pm.expect(pm.environment.get(\"title\")).to.be.equal(\"Postman test\");",
+							"    pm.expect(pm.environment.get(\"body\")).to.be.equal(\"XDDD\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Postman test\",\n\t\"body\": \"Testing with postman\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							"pm.test(\"Response status is OK\", function(){",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"pm.test(\"Question was added successfully\", function(){",
+							"    var questions = pm.response.json();",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(questions.length).to.be.equal(4);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Postman test\",\n\t\"body\": \"Testing with postman\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Postman test\",\n\t\"body\": \"Testing with postman\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							"pm.test(\"Response status is OK\", function(){",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"pm.test(\"Question was added successfully\", function(){",
+							"    var questions = pm.response.json();",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(questions.length).to.be.equal(4);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"asd\",\n\t\"body\": \"XDDD\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							"pm.test(\"Response status is OK\", function(){",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"pm.test(\"Question was added successfully\", function(){",
+							"    var questions = pm.response.json();",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(questions.length).to.be.equal(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"asd\",\n\t\"body\": \"XDDD\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"asd\",\n\t\"body\": \"XDDD\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"asd\",\n\t\"body\": \"XDDD\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							"pm.test(\"Response status is OK\", function(){",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"pm.test(\"Question was added successfully\", function(){",
+							"    var questions = pm.response.json();",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(questions.length).to.be.equal(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"asd\",\n\t\"body\": \"XDDD\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/question-list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd153ab-c3a4-43d9-aa4b-cbb7ff1d700b",
+						"exec": [
+							"pm.test(\"Response status is OK\", function(){",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"pm.test(\"Question was added successfully\", function(){",
+							"    var questions = pm.response.json();",
+							"    pm.response.to.not.be.error;",
+							"    pm.expect(questions.length).to.be.equal(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "John",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"asd\",\n\t\"body\": \"XDDD\",\n\t\"tags\": \"test,ok\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/question-list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question-list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
